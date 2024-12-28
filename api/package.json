@@ -1,0 +1,8 @@
+{
+  "name": "@debato/api",
+  "version": "0.0.1",
+  "description": "Api",
+  "main": "index.ts",
+  "author": "TendTo",
+  "license": "Apache-2.0"
+}

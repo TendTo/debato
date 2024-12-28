@@ -1,0 +1,30 @@
+{
+  "name": "debato",
+  "version": "0.0.1",
+  "description": "Challenge, debate and surpass your opponents in a game of wits and dialectics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TendTo/delpi.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "TendTo",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/TendTo/delpi/issues"
+  },
+  "homepage": "https://github.com/TendTo/delpi#readme",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "api"
+  ],
+  "dependencies": {
+    "typescript": "^5.7.2"
+  }
+}

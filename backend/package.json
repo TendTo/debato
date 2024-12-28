@@ -1,0 +1,24 @@
+{
+  "name": "@debato/backend",
+  "version": "0.0.1",
+  "description": "Backend",
+  "main": "main.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node main.ts",
+    "prestart": "npm run build",
+    "start": "node dist/main.js"
+  },
+  "author": "TendTo",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@debato/api": "file:../api",
+    "joi": "^17.13.3",
+    "socket.io": "^4.8.1",
+    "ts-node": "^10.9.2"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.9",
+    "utf-8-validate": "^6.0.5"
+  }
+}
