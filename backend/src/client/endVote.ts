@@ -1,13 +1,12 @@
 import type { Server } from "socket.io";
 import { handler, DebatoSocket } from "../util";
-import { Rooms, VoteCode } from "../data";
-import { voteSchema } from "./schema";
+import { Rooms } from "../data";
 
 export default function (io: Server, socket: DebatoSocket) {
-  return handler((vote: VoteCode) => {
+  return handler(() => {
     const room = Rooms.getRoomFromSocket(socket);
-    room.vote(socket, vote);
-    console.log("Casted vote...", socket.id, vote);
+    room.endVote(socket);
+    console.log("Ending vote...");
     room.emitUpdatedGame(socket);
-  }, voteSchema);
+  });
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { List } from "@mui/material";
-import RoomPlayer from "./RoomPlayer";
+import RoomPlayer from "./UserListItem";
 import { RoomStateContext } from "../context";
 
 export default function () {
@@ -8,7 +8,7 @@ export default function () {
 
   return (
     <List dense>
-      {roomState.users?.map((user) => (
+      {roomState.users.map((user) => (
         <RoomPlayer key={user.name} user={user} />
       ))}
     </List>

@@ -26,7 +26,7 @@ export default class Game {
     if (this.phase !== GamePhase.NOT_STARTED) {
       throw new GameAlreadyStartedError();
     }
-    if (this.room.users.length < 4) {
+    if (this.room.users.length < 3) {
       throw new NotEnoughPlayersError();
     }
     if (this.room.configuration.maxRounds < 1) {
@@ -54,7 +54,7 @@ export default class Game {
     for (const player of this.players) {
       player.role = Role.UNASSIGNED;
     }
-    this.players[this.turn % this.players.length].role = Role.JUDGE;
+    this.players[this.turn % this.players.length].role = Role.MEDIATOR;
     this.players[(this.turn + 1) % this.players.length].role = Role.THESIS;
     this.phase = GamePhase.CHOOSE;
   }

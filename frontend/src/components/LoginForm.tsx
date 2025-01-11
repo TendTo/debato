@@ -75,6 +75,7 @@ async function socketLogin(formData: FormData | null): Promise<string | null> {
     const error = roomId
       ? await WebSocket.instance.emitWithAck("joinRoom", roomId, name)
       : await WebSocket.instance.emitWithAck("createRoom", name);
+    console.log("socketLogin", error);
     return error ? apiErrorToString(error) : null;
   } catch (e) {
     console.error("socketLogin", e);

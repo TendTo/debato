@@ -1,24 +1,44 @@
-import { ErrorType, RoomState } from "@debato/api";
-import React, { createContext, useMemo, useState } from "react";
+import { defaultConfiguration, RoomState, UserState } from "@debato/api";
+import React, { createContext, useCallback, useEffect, useState } from "react";
 import { WebSocket } from "../api";
 
+interface ExtendedRoomState extends RoomState {
+  user: UserState;
+}
+
 export interface RoomStateContextType {
-  roomState: RoomState;
-  setRoomState: React.Dispatch<React.SetStateAction<RoomState>>;
+  roomState: ExtendedRoomState;
+  setRoomState: React.SetStateAction<RoomState>;
 }
 
 const defaultValue: RoomStateContextType = {
-  roomState: { error: ErrorType.NOT_LOGGED_IN_ERROR, errorMessage: "" },
-  setRoomState: () => void 0,
+  roomState: {
+    users: [],
+    configuration: defaultConfiguration,
+    roomId: "",
+    user: { name: "", id: "", isOwner: false },
+  },
+  setRoomState: () => defaultValue.roomState,
 };
 
 export const RoomStateContext =
   createContext<RoomStateContextType>(defaultValue);
 
 export default function ({ children }) {
-  const [roomState, setRoomState] = useState(defaultValue.roomState);
+  const [roomState, extendedSetRoomState] = useState(defaultValue.roomState);
 
-  useMemo(() => {
+  const setRoomState = useCallback(
+    (roomState: RoomState) => {
+      const user = roomState.users.find(
+        (u) => u.id === WebSocket.instance.socket.id
+      ) ?? { name: "", id: "", isOwner: false };
+      extendedSetRoomState({ ...roomState, user });
+      return roomState;
+    },
+    [extendedSetRoomState]
+  );
+
+  useEffect(() => {
     console.log("WebSocket.instance.on updatedRoom");
     WebSocket.instance.on("updatedRoom", (roomState) => {
       console.log(roomState);

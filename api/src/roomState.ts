@@ -21,7 +21,7 @@ export type RoomConfiguration = {
 
 export const defaultConfiguration: RoomConfiguration = {
   thesis: [],
-  maxPlayers: 2,
+  maxPlayers: 20,
   maxRounds: 5,
   // One between Thesis and Antithesis won
   pointsVoteWinner: 1,
@@ -44,20 +44,8 @@ export interface UserState {
   isOwner: boolean;
 }
 
-interface LoginStateError {
-  error: ErrorTypeCode;
-  errorMessage: string;
-  roomId?: never;
-  configuration?: never;
-  name?: never;
-  users?: never;
-}
-interface LoginStatePayload {
-  error?: never;
-  errorMessage?: never;
+export interface RoomState {
   roomId: string;
   configuration: RoomConfiguration;
   users: UserState[];
 }
-
-export type RoomState = LoginStateError | LoginStatePayload;

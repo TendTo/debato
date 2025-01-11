@@ -27,7 +27,10 @@ export interface ClientToServerEvents {
   leaveRoom: () => void;
   updateConfiguration: (configuration: RoomConfiguration) => void;
   castVote: (vote: VoteCode) => void;
-  chooseAntithesis: (antithesis: string) => void;
+  chooseRoles: (antithesis: string) => void;
+  startGame: () => void;
+  endVote: () => void;
+  endDebate: () => void;
 }
 
 export interface ServerToClientEvents {

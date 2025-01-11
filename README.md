@@ -1,3 +1,13 @@
+# Debato: the game
+
+Challenge your friends in a debate game where you have to defend a randomly selected thesis or promote the antithesis.
+Whoever wins the debate, wins the game.
+
+> [!IMPORTANT]  
+> Work in progress
+
+## Architecture
+
 ```mermaid
 stateDiagram-v2
     state "Assign Mediator (show thesis) and Thesis players" as s1
@@ -30,4 +40,22 @@ stateDiagram-v2
     s10 --> turn_check
     turn_check --> s1 : Start new round
     turn_check --> [*] : End game
+```
+
+```mermaid
+sequenceDiagram
+    participant GAME
+    participant Mediator
+    participant Judges
+
+    loop Game
+        GAME ->> Mediator: Start Round: Assign Mediator/Thesis
+        Mediator ->> GAME: Choose Antithesis
+        GAME ->> Mediator: Start debate
+        Mediator ->> GAME: End debate
+        GAME ->> Judges: Start voting
+        Judges ->> GAME: Vote
+        Mediator ->> GAME: End voting
+        Mediator ->> GAME: End round
+    end
 ```
